@@ -1,0 +1,65 @@
+button:focus {
+  outline: 2px solid #ce1444;
+}
+
+.topbar-main {
+  height: 80px;
+  position: fixed;
+  background: white;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.topbar-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  padding: 0 30px 0 30px;
+}
+
+.topbar-button {
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  transition: background 0.2s ease-out;
+}
+
+.topbar-button:hover {
+  background: #ececec;
+}
+
+#topbar-home-button {
+  margin-left: 30px;
+}
+
+#topbar-settings-button {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.topbar-search {
+  background: url("../../resources/icons/search.svg") no-repeat scroll 16px 10px, #ececec;
+  border: 0;
+  border-radius: 5px;
+  color: #333333;
+  font-family: "Inter", sans-serif;
+  width: 650px;
+  height: 40px;
+  padding: 0 16px 0 50px;
+  margin-left: 105px;
+  transition: all 0.2s ease-out;
+}
+
+.topbar-search:focus {
+  outline: 2px solid #ce1444;
+  box-shadow: 0 0 6px #ce1444ff;
+}
+
+.topbar-svg {
+  pointer-events: none;
+}
