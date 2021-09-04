@@ -29,4 +29,17 @@
 import './app.jsx';
 import './index.css';
 
+console.log("test");
+/* const fs = require("C:/Users/Prime/NodeProjects/note-manager/node_modules/fs");
+fs.readdir("C:/Users/Prime/Downloads", (err, files) => {
+  console.log("done");
+}) */
+/* const sqlite = require('sqlite3');
+const db = new sqlite.Database(
+  "C:/Users/Prime/Downloads/test.db",
+  (err) => {
+    console.log(err);
+  }
+); */
+
 console.log('👋 This message is being logged by "renderer.js", included via webpack');

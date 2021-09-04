@@ -1,0 +1,54 @@
+.overview-container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  padding: 120px 100px 0 100px;
+}
+
+.overview-item-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 30px;
+  max-width: 100%;
+}
+
+.overview-item {
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  color: #171717;
+  text-decoration: none;
+  margin-right: 16px;
+  margin-bottom: 16px;
+}
+
+.overview-item-header {
+  width: 280px;
+  height: 120px;
+}
+
+.overview-item-header-gaming {
+  background: #ce1444;
+}
+
+.overview-item-header-edu {
+  background: #4e7cc2;
+}
+
+.overview-item-description {
+  height: 50px;
+  padding: 18px 20px 12px 20px;
+}
+
+.overview-item-description-title {
+  display: block;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weighT: 600;
+}
+
+.overview-item-description-edit {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  color: #333333;
+}

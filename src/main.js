@@ -1,6 +1,16 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+const sqlite = require('sqlite3');
+const db = new sqlite.Database(
+  "C:/Users/Prime/Downloads/test.db",
+  (err) => {
+    if (err) {
+      console.log(err);
+    }
+  }
+);
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -9,8 +19,13 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    "width": 1920,
+    "height": 1080,
+    "radii": [5, 5, 5, 5],
+    "webPreferences": {
+      "nodeIntegration": true,
+      "contextIsolation": false
+    }
   });
 
   // and load the index.html of the app.
