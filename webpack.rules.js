@@ -1,6 +1,6 @@
 module.exports = [
   // Add support for native node modules
-  {
+  /* {
     resolve: {
       fallback: {
         "path": false,
@@ -12,7 +12,7 @@ module.exports = [
         "child_process": false
       }
     }
-  },
+  }, */
   {
     // We're specifying native_modules in the test because the asset relocator loader generates a
     // "fake" .node file which is really a cjs file.

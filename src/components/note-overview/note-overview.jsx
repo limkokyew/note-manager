@@ -1,7 +1,7 @@
 import React from 'react';
 import './note-overview.css';
 
-export class NoteOverview extends React.Component {  
+export class NoteOverview extends React.Component {
   render() {
     return (
       <div className="overview-container">
