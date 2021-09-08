@@ -1,16 +1,35 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const fs = require("fs");
+const sqlite = require('sqlite3');
+let db;
 
-/* const sqlite = require('sqlite3');
-const db = new sqlite.Database(
-  "C:/Users/Prime/Downloads/test.db",
-  (err) => {
-    if (err) {
-      console.log(err);
+function setupDatabase() {
+  db = new sqlite.Database(
+    path.join(app.getPath("userData"), "note-manager-main.db"),
+    (err) => {
+      if (err) {
+        console.log(err);
+      }
     }
-  }
-); */
+  );
+  // Create note categories table
+  db.run(`
+  CREATE TABLE IF NOT EXISTS note_categories (
+    name VARCHAR (50) PRIMARY KEY
+  );`);
+  // Create notes table
+  db.run(`
+  CREATE TABLE IF NOT EXISTS notes (
+    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    name     VARCHAR (50),
+    content  VARCHAR (2000),
+    category VARCHAR (50) REFERENCES note_categories(name) ON DELETE CASCADE
+                                                           ON UPDATE CASCADE
+  );`);
+}
+
+setupDatabase();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -23,8 +42,6 @@ const createWindow = () => {
     "width": 1920,
     "height": 1080,
     "webPreferences": {
-      /* "nodeIntegration": true,
-      "contextIsolation": false, */
       "contextIsolation": true,
       "preload": path.join(__dirname, "preload.js"),
     }
@@ -46,6 +63,7 @@ app.on('ready', createWindow);
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
+  db.close();
   if (process.platform !== 'darwin') {
     app.quit();
   }
@@ -61,7 +79,7 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on("toMain", (event, args) => {
+ipcMain.on("addNote", (args) => {
   fs.writeFile("C:/Users/Prime/Downloads/test.txt", "foo", (err) => {
     if (err) {
       console.log(err);

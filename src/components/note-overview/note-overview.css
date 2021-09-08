@@ -1,3 +1,36 @@
+.overview-header {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 40px;
+}
+
+.overview-header-button {
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+}
+
+#add-button {
+  background-image: url("../../resources/icons/add.svg");
+  background-position-x: 8px;
+  background-position-y: 6px;
+  background-repeat: no-repeat;
+  border: 2px solid #ce1444;
+  border-radius: 5px;
+  color: #ce1444;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 20px 8px 45px;
+  margin-left: auto;
+  margin-right: 18px;
+  transition: 0.2s all ease;
+}
+
+#add-button:hover {
+  background-color: #ce1444;
+  background-image: url("../../resources/icons/add_white.svg");
+  color: white;
+}
+
 .overview-container {
   display: flex;
   flex-direction: column;
@@ -19,12 +52,15 @@
   border-radius: 5px;
   color: #171717;
   text-decoration: none;
-  margin-right: 16px;
   margin-bottom: 16px;
 }
 
+.overview-item:not(:last-child) {
+  margin-right: 23px;
+}
+
 .overview-item-header {
-  width: 280px;
+  width: 260px;
   height: 120px;
 }
 

@@ -33,6 +33,6 @@ import './index.css';
 writeFile("C:/Users/Prime/Downloads/test.txt", "Hallo Welt", (err) => {
   console.log("finished");
 }); */
-window.api.send("toMain", "foobar");
+window.api.send("addNote", {"noteName": "foobar"});
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');

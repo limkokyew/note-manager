@@ -5,6 +5,9 @@ export class NoteOverview extends React.Component {
   render() {
     return (
       <div className="overview-container">
+        <div className="overview-header">
+          <button className="overview-header-button" id="add-button">Add</button>
+        </div>
         <h3>Recently Viewed</h3>
         <div className="overview-item-container">
           <a className="overview-item" href="https://www.google.de">
