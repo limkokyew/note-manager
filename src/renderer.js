@@ -29,10 +29,5 @@
 import './app.jsx';
 import './index.css';
 
-/* const { writeFile } = require('fs');
-writeFile("C:/Users/Prime/Downloads/test.txt", "Hallo Welt", (err) => {
-  console.log("finished");
-}); */
-window.api.send("addNote", {"noteName": "foobar"});
-
+// window.api.send("addNote", {"noteName": "myFirstNote"});
 console.log('👋 This message is being logged by "renderer.js", included via webpack');

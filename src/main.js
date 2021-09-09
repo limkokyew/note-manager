@@ -24,6 +24,8 @@ function setupDatabase() {
     id       INTEGER PRIMARY KEY AUTOINCREMENT,
     name     VARCHAR (50),
     content  VARCHAR (2000),
+    create_date DATETIME,
+    edit_date   DATETIME,
     category VARCHAR (50) REFERENCES note_categories(name) ON DELETE CASCADE
                                                            ON UPDATE CASCADE
   );`);
@@ -79,10 +81,34 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on("addNote", (args) => {
-  fs.writeFile("C:/Users/Prime/Downloads/test.txt", "foo", (err) => {
-    if (err) {
-      console.log(err);
-    }
+ipcMain.on("addNote", (ipc_event, args) => {
+  const currentDate = new Date().toISOString().replace("T", " ").substr(0, 19);
+  console.log(args);
+  db.run(`
+  INSERT INTO notes(name, content, create_date, edit_date, category)
+  VALUES(
+    "${args.noteName}",
+    "",
+    "${currentDate}",
+    "${currentDate}",
+    NULL
+  );`);
+});
+
+ipcMain.handle("runDBStatement", async (ipc_event, args) => {
+  console.log(ipc_event);
+  console.log(args);
+  return new Promise((resolve, reject) => {
+    db.all(args, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    });
   });
+  /* let results = db.all(args, function (err, result) {
+    return result;
+  });
+  return results; */
 });

@@ -1,7 +1,6 @@
 const { contextBridge, ipcRenderer } = require("electron");
 const sendChannels = ["addNote"];
 
-
 // Expose protected methods that allow the renderer process to use
 // the ipcRenderer without exposing the entire object
 contextBridge.exposeInMainWorld(
@@ -9,15 +8,13 @@ contextBridge.exposeInMainWorld(
     send: (channel, data) => {
       // whitelist channels
       if (sendChannels.includes(channel)) {
+        console.log("About to send following data!");
+        console.log(data);
         ipcRenderer.send(channel, data);
       }
     },
-    receive: (channel, func) => {
-      let validChannels = ["fromMain"];
-      if (validChannels.includes(channel)) {
-        // Deliberately strip event as it includes `sender` 
-        ipcRenderer.on(channel, (event, ...args) => func(...args));
-      }
+    runDBStatement: (channel, data) => {
+      return ipcRenderer.invoke("runDBStatement", data);
     }
   }
 );
