@@ -1,6 +1,11 @@
-import React from 'react';
-import './note-overview.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./note-overview.css";
 
+/**
+ * Fetches id, name and edit_date of all notes from the database.
+ * @return {Array}    SELECT statement results.
+ */
 async function getNotes() {
   const notes = window.api.runDBStatement(
     "runDBStatement",
@@ -9,26 +14,28 @@ async function getNotes() {
   return notes;
 }
 
+/**
+ * Creates note DOM elements from an array of notes.
+ * @param {Array} props Array of note elements. Each element must have
+                        attributes id, name and edit_date.
+ * @return  {JSX}       Returns the JSX of all notes.
+ */
 function NoteElements(props) {
   const notes = props.notes;
   if (notes !== null) {
-    console.log("VICTORY!");
-    console.log(notes);
     const noteItems = notes.map((noteElement) => {
       return (
-        <a className="overview-item" key={noteElement.id} href="https://www.google.de">
+        <Link className="overview-item" key={noteElement.id} to={`/notes/${noteElement.id}`}>
           <div className="overview-item-header overview-item-header-edu"></div>
           <div className="overview-item-description">
             <span className="overview-item-description-title">{noteElement.name}</span>
             <span className="overview-item-description-edit">last edited on {noteElement.edit_date}</span>
           </div>
-        </a>
+        </Link>
       );
     });
-    console.log(noteItems);
     return noteItems;
   } else {
-    console.log("DEFEAT!");
     return null;
   }
 }
@@ -42,8 +49,6 @@ export class NoteOverview extends React.Component {
   updateNotes() {
     getNotes().then((result) => {
       this.setState({noteElements: result});
-      console.log(result);
-      console.log("I have set state!");
     });
   }
   

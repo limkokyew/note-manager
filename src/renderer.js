@@ -26,8 +26,8 @@
  * ```
  */
 
-import './app.jsx';
-import './index.css';
+import "./app.jsx";
+import "./index.css";
 
 // window.api.send("addNote", {"noteName": "myFirstNote"});
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+console.log("👋 This message is being logged by 'renderer.js', included via webpack");
