@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "./note-overview.css";
 
 /**
@@ -12,6 +12,26 @@ async function getNotes() {
     `SELECT id, name, edit_date FROM notes;`
   );
   return notes;
+}
+
+function AddNoteButton() {
+  let history = useHistory();
+  
+  function handleNewNote() {
+    const note = window.api.send(
+      "addNote", {noteName: "Untitled", content: ""}
+    );
+    window.api.runDBStatement(
+      "runDBStatement",
+      "SELECT last_insert_rowid() as id"
+    ).then((result) => {
+      history.push(`/notes/${result[0].id}`);
+    });
+  }
+  
+  return (
+    <button className="overview-header-button" id="add-button" onClick={handleNewNote}>New</button>
+  );
 }
 
 /**
@@ -60,7 +80,7 @@ export class NoteOverview extends React.Component {
     return (
       <div className="overview-container">
         <div className="overview-header">
-          <button className="overview-header-button" id="add-button">Add</button>
+          <AddNoteButton />
         </div>
         <h3>Recently Viewed</h3>
         <div className="overview-item-container">

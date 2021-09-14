@@ -6,10 +6,7 @@ const sendChannels = ["addNote"];
 contextBridge.exposeInMainWorld(
   "api", {
     send: (channel, data) => {
-      // whitelist channels
       if (sendChannels.includes(channel)) {
-        console.log("About to send following data!");
-        console.log(data);
         ipcRenderer.send(channel, data);
       }
     },

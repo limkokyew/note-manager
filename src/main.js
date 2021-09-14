@@ -81,23 +81,20 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
-ipcMain.on("addNote", (ipc_event, args) => {
+ipcMain.on("addNote", (ipcEvent, args) => {
   const currentDate = new Date().toISOString().replace("T", " ").substr(0, 19);
-  console.log(args);
   db.run(`
   INSERT INTO notes(name, content, create_date, edit_date, category)
   VALUES(
     "${args.noteName}",
-    "",
+    "${args.content}",
     "${currentDate}",
     "${currentDate}",
     NULL
   );`);
 });
 
-ipcMain.handle("runDBStatement", async (ipc_event, args) => {
-  console.log(ipc_event);
-  console.log(args);
+ipcMain.handle("runDBStatement", async (ipcEvent, args) => {
   return new Promise((resolve, reject) => {
     db.all(args, (err, row) => {
       if (err) {
