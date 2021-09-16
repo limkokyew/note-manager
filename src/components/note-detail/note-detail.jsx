@@ -26,7 +26,8 @@ async function getNoteContents(id) {
 export class NoteDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentNote: {}}
+    this.state = {currentNote: {}, editMode: false};
+    this.toggleEditMode = this.toggleEditMode.bind(this);
   }
   
   componentDidMount() {
@@ -40,13 +41,19 @@ export class NoteDetail extends React.Component {
     });
   }
   
+  toggleEditMode() {
+    this.setState({editMode: true});
+  }
+  
   render() {
     return (
       <div className="container">
         <div className="main">
           <div className="main-header">
             <h1>{this.state.currentNote.name}</h1>
-            <button id="edit-button">Edit</button>
+              {!this.state.editMode &&
+                <button id="edit-button" onClick={this.toggleEditMode}>Edit</button>
+              }
           </div>
           <p>{this.state.currentNote.content}</p>
         </div>
