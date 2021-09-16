@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { NoteEditor } from "./note-editor.jsx";
 
 import "./note-detail.css";
 
@@ -26,7 +27,10 @@ async function getNoteContents(id) {
 export class NoteDetail extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {currentNote: {}, editMode: false};
+    this.state = {
+      currentNote: {},
+      editMode: false,
+    };
     this.toggleEditMode = this.toggleEditMode.bind(this);
   }
   
@@ -56,6 +60,7 @@ export class NoteDetail extends React.Component {
               }
           </div>
           <p>{this.state.currentNote.content}</p>
+          <NoteEditor editMode={this.state.editMode} value={[{type: "paragraph", children: [{text: ""}]}]} />
         </div>
         <div className="table-of-contents">
           <span className="table-of-contents-header">Table of Contents</span>
