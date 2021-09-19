@@ -8,6 +8,7 @@ body {
   --heading-color: #222222;
   --paragraph-color: #444444;
   --border-color-default: #dadada;
+  --shadow-color: #33333333;
 }
 
 h1 {
@@ -31,4 +32,50 @@ h1::selection, h3::selection, p::selection, img::selection,
 span::selection, div::selection, input::selection {
   color: white;
   background: var(--primary-color);
+}
+
+button {
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 22px 8px 22px;
+  transition: all 0.2s ease-out;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-horizontal-center {
+  justify-content: center;
+}
+
+.flex-vertical-center {
+  align-items: center;
+}
+
+.button-filled {
+  border: 2px solid var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+}
+
+.button-outline {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.button-outline:hover {
+  background: var(--primary-color);
+  color: white;
 }

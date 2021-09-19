@@ -51,12 +51,12 @@ export class NoteDetail extends React.Component {
   
   render() {
     return (
-      <div className="container">
+      <div className="flex flex-row container">
         <div className="main">
-          <div className="main-header">
+          <div className="flex flex-row flex-vertical-center">
             <h1>{this.state.currentNote.name}</h1>
               {!this.state.editMode &&
-                <button id="edit-button" onClick={this.toggleEditMode}>Edit</button>
+                <button id="edit-button" className="button-outline" onClick={this.toggleEditMode}>Edit</button>
               }
           </div>
           <p>{this.state.currentNote.content}</p>
