@@ -32,6 +32,7 @@ export class NoteDetail extends React.Component {
       editMode: false,
     };
     this.toggleEditMode = this.toggleEditMode.bind(this);
+    this.updateEdit = this.updateEdit.bind(this);
   }
   
   componentDidMount() {
@@ -46,7 +47,23 @@ export class NoteDetail extends React.Component {
   }
   
   toggleEditMode() {
-    this.setState({editMode: true});
+    this.setState({editMode: !this.state.editMode});
+  }
+  
+  updateEdit() {
+    this.setState({editMode: !this.state.editMode});
+    window.api.runDBStatement(
+      "runDBStatement", `
+      UPDATE notes
+      SET content = "Testa"
+      WHERE id = ${this.state.currentNote.id};
+      `
+    ).then((result) => {
+      let updateNote = this.state.currentNote;
+      updateNote.content = "Testa";
+      this.setState({currentNote: updateNote});
+      console.log("Successfully updated note.");
+    });
   }
   
   render() {
@@ -60,7 +77,12 @@ export class NoteDetail extends React.Component {
               }
           </div>
           <p>{this.state.currentNote.content}</p>
-          <NoteEditor editMode={this.state.editMode} value={[{type: "paragraph", children: [{text: ""}]}]} />
+          <NoteEditor
+            editMode={this.state.editMode}
+            value={[{type: "paragraph", children: [{text: ""}]}]}
+            handleCancel={this.toggleEditMode}
+            handleUpdate={this.updateEdit}
+          />
         </div>
         <div className="table-of-contents">
           <span className="table-of-contents-header">Table of Contents</span>

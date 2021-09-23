@@ -14,8 +14,8 @@ export function NoteEditor(props) {
   const editMode = props.editMode;
   const editor = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState(props.value);
-  const renderElement = useCallback(props => {
-    return <DefaultElement {...props} />
+  const renderElement = useCallback(renderProps => {
+    return <DefaultElement {...renderProps} />
   }, []);
   
   
@@ -34,8 +34,8 @@ export function NoteEditor(props) {
         </Slate>
       </div>
       <div className="flex flex-row" id="edit-footer">
-        <button id="edit-cancel-button" className="button-outline">Cancel</button>
-        <button id="edit-complete-button" className="button-filled">Update</button>
+        <button id="edit-cancel-button" className="button-outline" onClick={props.handleCancel}>Cancel</button>
+        <button id="edit-complete-button" className="button-filled" onClick={props.handleUpdate}>Update</button>
       </div>
     </>
   ) : null;
