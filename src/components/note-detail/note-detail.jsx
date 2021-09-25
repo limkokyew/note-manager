@@ -52,7 +52,7 @@ export class NoteDetail extends React.Component {
   
   updateEdit() {
     this.setState({editMode: !this.state.editMode});
-    window.api.runDBStatement(
+    /* window.api.runDBStatement(
       "runDBStatement", `
       UPDATE notes
       SET content = "Testa"
@@ -63,7 +63,7 @@ export class NoteDetail extends React.Component {
       updateNote.content = "Testa";
       this.setState({currentNote: updateNote});
       console.log("Successfully updated note.");
-    });
+    }); */
   }
   
   render() {
@@ -76,10 +76,9 @@ export class NoteDetail extends React.Component {
                 <button id="edit-button" className="button-outline" onClick={this.toggleEditMode}>Edit</button>
               }
           </div>
-          <p>{this.state.currentNote.content}</p>
           <NoteEditor
             editMode={this.state.editMode}
-            value={[{type: "paragraph", children: [{text: ""}]}]}
+            note={this.state.currentNote}
             handleCancel={this.toggleEditMode}
             handleUpdate={this.updateEdit}
           />
