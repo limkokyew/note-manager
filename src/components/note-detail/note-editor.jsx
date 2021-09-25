@@ -95,6 +95,10 @@ export function NoteEditor(props) {
     setValue(parseNoteContent(props.note.content));
   }, [props.note]);
   
+  const handleUpdate = () => {
+    props.handleUpdate(serialize({children: value}));
+  };
+  
   return editMode ? (
     <>
       <div id="slate-wrapper">
@@ -111,7 +115,7 @@ export function NoteEditor(props) {
       </div>
       <div className="flex flex-row" id="edit-footer">
         <button id="edit-cancel-button" className="button-outline" onClick={props.handleCancel}>Cancel</button>
-        <button id="edit-complete-button" className="button-filled" onClick={props.handleUpdate}>Update</button>
+        <button id="edit-complete-button" className="button-filled" onClick={handleUpdate}>Update</button>
       </div>
     </>
   ) : (

@@ -50,20 +50,19 @@ export class NoteDetail extends React.Component {
     this.setState({editMode: !this.state.editMode});
   }
   
-  updateEdit() {
+  updateEdit(newContent) {
     this.setState({editMode: !this.state.editMode});
-    /* window.api.runDBStatement(
+    window.api.runDBStatement(
       "runDBStatement", `
       UPDATE notes
-      SET content = "Testa"
+      SET content = "${newContent}"
       WHERE id = ${this.state.currentNote.id};
       `
     ).then((result) => {
-      let updateNote = this.state.currentNote;
-      updateNote.content = "Testa";
+      let updateNote = { ...this.state.currentNote };
+      updateNote.content = newContent;
       this.setState({currentNote: updateNote});
-      console.log("Successfully updated note.");
-    }); */
+    });
   }
   
   render() {
