@@ -93,7 +93,7 @@ export function NoteEditor(props) {
   // Update the editor whenever a different note is selected
   useEffect(() => {
     setValue(parseNoteContent(props.note.content));
-  }, [props.note]);
+  }, [props.note.id]);
   
   const handleUpdate = () => {
     props.handleUpdate(serialize({children: value}));

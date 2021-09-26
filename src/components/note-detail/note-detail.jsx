@@ -27,12 +27,17 @@ async function getNoteContents(id) {
 export class NoteDetail extends React.Component {
   constructor(props) {
     super(props);
+    
+    // Name of currentNote must be initialized with an empty string, otherwise,
+    // the <input> element changes from uncontrolled to controlled
     this.state = {
-      currentNote: {},
+      currentNote: {name: ""},
       editMode: false,
     };
+    
     this.toggleEditMode = this.toggleEditMode.bind(this);
     this.updateEdit = this.updateEdit.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
   }
   
   componentDidMount() {
@@ -50,19 +55,29 @@ export class NoteDetail extends React.Component {
     this.setState({editMode: !this.state.editMode});
   }
   
-  updateEdit(newContent) {
-    this.setState({editMode: !this.state.editMode});
+  updateNoteAttribute(key, value) {
+    const currentDate = new Date().toISOString().replace("T", " ").substr(0, 19);
     window.api.runDBStatement(
       "runDBStatement", `
       UPDATE notes
-      SET content = "${newContent}"
+      SET ${key} = "${value}",
+          edit_date = "${currentDate}"
       WHERE id = ${this.state.currentNote.id};
       `
     ).then((result) => {
       let updateNote = { ...this.state.currentNote };
-      updateNote.content = newContent;
+      updateNote[key] = value;
       this.setState({currentNote: updateNote});
     });
+  }
+  
+  updateTitle(inputEvent) {
+    this.updateNoteAttribute("name", inputEvent.target.value);
+  }
+  
+  updateEdit(newContent) {
+    this.setState({editMode: !this.state.editMode});
+    this.updateNoteAttribute("content", newContent);
   }
   
   render() {
@@ -70,7 +85,7 @@ export class NoteDetail extends React.Component {
       <div className="flex flex-row container">
         <div className="main">
           <div className="flex flex-row flex-vertical-center">
-            <h1>{this.state.currentNote.name}</h1>
+            <input id="title" type="text" defaultValue={this.state.currentNote.name} onBlur={this.updateTitle} />
               {!this.state.editMode &&
                 <button id="edit-button" className="button-outline" onClick={this.toggleEditMode}>Edit</button>
               }

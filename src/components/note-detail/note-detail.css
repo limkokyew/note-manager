@@ -8,13 +8,30 @@
 }
 
 .container {
-  font-family: "Inter", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   padding-top: 120px;
 }
 
 .main {
   width: 700px;
   padding-left: 280px;
+}
+
+#title {
+  background: transparent;
+  border: 0;
+  color: var(--primary-color);
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  padding-left: 0;
+  margin: 16px 0 16px 0;
+  width: 80%;
+}
+
+#title:focus {
+  outline: 2px solid var(--primary-color);
+  padding: 8px 16px 8px 16px;
 }
 
 #edit-button {
